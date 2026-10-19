@@ -284,7 +284,7 @@ STACK = [
     ("FRONTEND", "Web apps and interfaces", [("Next.js", "nextjs"), ("React", "react"), ("TypeScript", "typescript"),
         ("Tailwind", "tailwindcss"), ("Vite", "vite")]),
     ("BACKEND & DATA", "APIs, auth, and storage", [("Node.js", "nodejs"), ("NestJS", "nestjs"), ("Python", "python"),
-        ("Django", "django"), ("PHP", "php"), ("PostgreSQL", "postgresql"), ("Prisma", "prisma"),
+        ("Django", "django"), ("PHP", "php"), ("Laravel", "laravel"), ("PostgreSQL", "postgresql"), ("Prisma", "prisma"),
         ("Supabase", "supabase"), ("Firebase", "firebase")]),
     ("MOBILE & INFRA", "Shipping and testing", [("React Native", "react"), ("Expo", "expo"), ("Docker", "docker"),
         ("Cloudflare", "cloudflare"), ("Vitest", "vitest")]),

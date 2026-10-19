@@ -10,7 +10,7 @@
 
 I'm **Gabrielle Tatel**, a full-stack developer and BS Computer Science student at Ateneo de Zamboanga University. I build software for campuses, local businesses, and communities in Mindanao, and I speak and lead student organizations when I'm not shipping.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img alt="Tech stack: Next.js, React, TypeScript, Tailwind, Vite, Node.js, NestJS, Python, Django, PHP, PostgreSQL, Prisma, Supabase, Firebase, React Native, Expo, Docker, Cloudflare, Vitest" src="assets/stack-light.svg" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img alt="Tech stack: Next.js, React, TypeScript, Tailwind, Vite, Node.js, NestJS, Python, Django, PHP, Laravel, PostgreSQL, Prisma, Supabase, Firebase, React Native, Expo, Docker, Cloudflare, Vitest" src="assets/stack-light.svg" width="100%"></picture>
 
 <br>
 
