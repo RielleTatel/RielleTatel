@@ -10,6 +10,8 @@
 
 I'm **Gabrielle Tatel**, a full-stack developer and BS Computer Science student at Ateneo de Zamboanga University. I build software for campuses, local businesses, and communities in Mindanao, and I speak and lead student organizations when I'm not shipping.
 
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img alt="Tech stack: Next.js, React, TypeScript, Tailwind, Vite, Node.js, NestJS, Python, Django, PHP, PostgreSQL, Prisma, Supabase, Firebase, React Native, Expo, Docker, Cloudflare, Vitest" src="assets/stack-light.svg" width="100%"></picture>
+
 <br>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-projects-dark.svg"><img alt="Projects" src="assets/h-projects-light.svg" width="100%"></picture>
@@ -28,12 +30,6 @@ I'm **Gabrielle Tatel**, a full-stack developer and BS Computer Science student 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-experience-dark.svg"><img alt="Experience" src="assets/h-experience-light.svg" width="100%"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/experience-dark.svg"><img alt="Symph Inc. — Software Developer (100,000+ records per bulk import). CITS Ateneo de Zamboanga — System Developer (~50% faster approvals, ~70% less manual encoding). Freelance — 5+ clients, 3 products shipped." src="assets/experience-light.svg" width="100%"></picture>
-
-<br>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-stack-dark.svg"><img alt="Stack" src="assets/h-stack-light.svg" width="100%"></picture>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img alt="Tech stack: Next.js, React / React Native, TypeScript, Node.js, NestJS, Python, Django, PHP, PostgreSQL, Prisma, Supabase, Firebase, Expo, Tailwind CSS, Docker, Cloudflare, Vite, Vitest" src="assets/stack-light.svg" width="100%"></picture>
 
 <br>
 

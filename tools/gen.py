@@ -202,20 +202,28 @@ def experience(roles, t, dark):
     return svg(w, h, body, t, title="Experience")
 
 # ---------------------------------------------------------------- stack
-def stack(tools, t, dark):
-    w = 1200
-    body = INV
-    x, y, rowh = 0, 0, 52
-    for name, icon in tools:
-        iw = 28 + 28 + measure(name, 15, 500)
-        if x + iw > w:
-            x, y = 0, y + rowh
-        c, cw = chip(x, y, name, t, size=15, h=40, icon=os.path.join(W, "img", "brand-icons", icon + ".svg"),
-                     mono=icon in MONO_ICONS, dark=dark)
-        body += c
-        x += cw + 8
-    h = y + 42
-    return svg(w, h, body, t, (500,), title="Tech stack: " + ", ".join(n for n, _ in tools))
+def stack(groups, t, dark):
+    w, pad, rowh, labw = 1200, 36, 104, 230
+    h = pad * 2 + rowh * len(groups) - 8
+    body = grid(w, h, t, pid="sg") + INV
+    tile, gap = 60, 22
+    for i, (label, sub, tools) in enumerate(groups):
+        y = pad + i * rowh
+        if i:
+            body += f'<line x1="{pad}" y1="{y-14}" x2="{w-pad}" y2="{y-14}" stroke="{t["border"]}"/>'
+        body += text(pad, y + 30, label, 13, 600, t["accent"], tracking=0.12)
+        body += text(pad, y + 52, sub, 14, 400, t["muted"])
+        x = pad + labw
+        for name, icon in tools:
+            cw = max(tile, measure(name, 12, 500) + 4)
+            tx = x + (cw - tile) / 2
+            body += f'<rect x="{tx}" y="{y}" width="{tile}" height="{tile}" rx="16" fill="{t["card"]}" stroke="{t["border"]}"/>'
+            filt = ' filter="url(#inv)"' if (icon in MONO_ICONS and dark) else ""
+            body += f'<image x="{tx+15}" y="{y+15}" width="30" height="30" href="{b64(os.path.join(W,"img","brand-icons",icon+".svg"))}"{filt}/>'
+            body += text(x + cw / 2, y + tile + 20, name, 12, 500, t["muted"], "middle")
+            x += cw + gap
+    names = ", ".join(n for _, _, tl in groups for n, _ in tl)
+    return svg(w, h, body, t, (400, 500, 600), title="Tech stack: " + names)
 
 # ---------------------------------------------------------------- contact
 def contact(t, dark):
@@ -272,11 +280,15 @@ ROLES = [
     dict(company="Independent projects", title="Freelance Developer", logo="logo.png",
          meta="FREELANCE  ·  ZAMBOANGA CITY", metrics=[("5+", "clients"), ("3", "products shipped")]),
 ]
-TOOLS = [("Next.js", "nextjs"), ("React / React Native", "react"), ("TypeScript", "typescript"),
-         ("Node.js", "nodejs"), ("NestJS", "nestjs"), ("Python", "python"), ("Django", "django"),
-         ("PHP", "php"), ("PostgreSQL", "postgresql"), ("Prisma", "prisma"), ("Supabase", "supabase"),
-         ("Firebase", "firebase"), ("Expo", "expo"), ("Tailwind CSS", "tailwindcss"),
-         ("Docker", "docker"), ("Cloudflare", "cloudflare"), ("Vite", "vite"), ("Vitest", "vitest")]
+STACK = [
+    ("FRONTEND", "Web apps and interfaces", [("Next.js", "nextjs"), ("React", "react"), ("TypeScript", "typescript"),
+        ("Tailwind", "tailwindcss"), ("Vite", "vite")]),
+    ("BACKEND & DATA", "APIs, auth, and storage", [("Node.js", "nodejs"), ("NestJS", "nestjs"), ("Python", "python"),
+        ("Django", "django"), ("PHP", "php"), ("PostgreSQL", "postgresql"), ("Prisma", "prisma"),
+        ("Supabase", "supabase"), ("Firebase", "firebase")]),
+    ("MOBILE & INFRA", "Shipping and testing", [("React Native", "react"), ("Expo", "expo"), ("Docker", "docker"),
+        ("Cloudflare", "cloudflare"), ("Vitest", "vitest")]),
+]
 BUTTONS = [("portfolio", "Portfolio ↗", None, True), ("linkedin", "LinkedIn", "linkedin", False),
            ("resume", "Résumé", None, False), ("email", "Email", None, False)]
 
@@ -289,11 +301,10 @@ for mode, t in THEMES.items():
     write(f"hero-{mode}.svg", hero(t, dark))
     write(f"h-projects-{mode}.svg", heading("Projects.", "Software built for real people, campuses, and communities in Mindanao.", t))
     write(f"h-experience-{mode}.svg", heading("Experience.", "Where I've shipped, and what changed because of it.", t))
-    write(f"h-stack-{mode}.svg", heading("Stack.", "Tools I reach for across web, mobile, and backend work.", t))
     for p in PROJECTS:
         write(f"p-{p['id']}-{mode}.svg", card(p, t, dark))
     write(f"experience-{mode}.svg", experience(ROLES, t, dark))
-    write(f"stack-{mode}.svg", stack(TOOLS, t, dark))
+    write(f"stack-{mode}.svg", stack(STACK, t, dark))
     write(f"contact-{mode}.svg", contact(t, dark))
     for bid, label, icon, primary in BUTTONS:
         write(f"btn-{bid}-{mode}.svg", button(label, icon, t, dark, primary))
@@ -315,6 +326,7 @@ md.append(f'<div align="center">\n\n{pic("hero", "Gabrielle Tatel — Building s
 md.append("<br>\n\n" + "&nbsp;".join(pic(f"btn-{b}", lab, None, links[b]) for b, lab, _, _ in BUTTONS) + "\n\n</div>\n")
 md.append("I'm **Gabrielle Tatel**, a full-stack developer and BS Computer Science student at Ateneo de Zamboanga University. "
           "I build software for campuses, local businesses, and communities in Mindanao, and I speak and lead student organizations when I'm not shipping.\n")
+md.append(pic("stack", "Tech stack: " + ", ".join(n for _, _, tl in STACK for n, _ in tl), "100%") + "\n")
 md.append("<br>\n\n" + pic("h-projects", "Projects", "100%") + "\n\n<p>")
 rows = []
 for i, p in enumerate(PROJECTS):
@@ -322,8 +334,6 @@ for i, p in enumerate(PROJECTS):
 md.append("\n".join(r + ("&nbsp;" if i % 2 == 0 else "<br><br>") for i, r in enumerate(rows)) + "\n</p>\n")
 md.append("<br>\n\n" + pic("h-experience", "Experience", "100%") + "\n\n" +
           pic("experience", "Symph Inc. — Software Developer (100,000+ records per bulk import). CITS Ateneo de Zamboanga — System Developer (~50% faster approvals, ~70% less manual encoding). Freelance — 5+ clients, 3 products shipped.", "100%") + "\n")
-md.append("<br>\n\n" + pic("h-stack", "Stack", "100%") + "\n\n" +
-          pic("stack", "Tech stack: " + ", ".join(n for n, _ in TOOLS), "100%") + "\n")
 md.append("<br>\n\n" + pic("contact", "Contact: tatelgabrielle19@gmail.com", "100%", links["email"]) + "\n")
 with open(os.path.join(OUT, "README.md"), "w") as f:
     f.write("\n".join(md))
