@@ -265,7 +265,10 @@ PROJECTS = [
     dict(id="ambagan", title="Ambagan", repo="ambagan-", wordmark="Ambagan", kicker="STELLAR HACKATHON",
          tagline="The Filipino paluwagan, on-chain. Rotating savings circles and community-approved loans on Stellar.",
          impact="Live at ambagan.site · on-chain AMBPHP asset", stack=["Next.js", "Stellar SDK", "Supabase", "Vitest"]),
-    dict(id="osa", title="OSA Activity Tracking", repo="osa-system", wordmark="OSA", kicker="ATENEO DE ZAMBOANGA",
+    dict(id="horario", title="Horario", repo="load-and-scheduling-system", cover="horario-cover.webp",
+         tagline="Manage teaching loads and generate class timetables for Ateneo de Zamboanga Junior High School.",
+         impact="Normal and special timetables", stack=["Laravel", "Alpine.js", "Tailwind", "MySQL"]),
+    dict(id="osa", title="OSA Activity Tracking", repo="osa-system", cover="osa-cover.webp",
          tagline="Real-time status for student-org activity requests across a 5-stage approval chain. No repeat office visits.",
          impact="~50% faster approvals · 40+ student orgs", stack=["Laravel", "PHP", "Tailwind", "MySQL"]),
     dict(id="debately", title="Debately", repo="debately", wordmark="Debately", kicker="BUILT BY A DEBATER",
@@ -331,7 +334,7 @@ md.append("<br>\n\n" + pic("h-projects", "Projects", "100%") + "\n\n<p>")
 rows = []
 for i, p in enumerate(PROJECTS):
     rows.append(pic(f"p-{p['id']}", f'{p["title"]}: {p["tagline"]} ({p["impact"]})', "49%", GH + p["repo"]))
-md.append("\n".join(r + ("&nbsp;" if i % 2 == 0 else "<br><br>") for i, r in enumerate(rows)) + "\n</p>\n")
+md.append("\n".join(r + ("&nbsp;" if i % 2 == 0 and i + 1 < len(rows) else "<br><br>") for i, r in enumerate(rows)) + "\n</p>\n")
 md.append("<br>\n\n" + pic("h-experience", "Experience", "100%") + "\n\n" +
           pic("experience", "Symph Inc. — Software Developer (100,000+ records per bulk import). CITS Ateneo de Zamboanga — System Developer (~50% faster approvals, ~70% less manual encoding). Freelance — 5+ clients, 3 products shipped.", "100%") + "\n")
 md.append("<br>\n\n" + pic("contact", "Contact: tatelgabrielle19@gmail.com", "100%", links["email"]) + "\n")
