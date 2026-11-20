@@ -157,7 +157,10 @@ def card(p, t, dark):
     body += INV
     body += f'<g clip-path="url(#{pid})"><rect width="{w}" height="{h}" fill="{t["card"]}"/>'
     if p.get("cover"):
-        body += f'<image width="{w}" height="{ch}" preserveAspectRatio="xMidYMid slice" href="{b64(os.path.join(W,"img",p["cover"]))}"/>'
+        if p.get("cover_background"):
+            body += f'<rect width="{w}" height="{ch}" fill="{p["cover_background"]}"/>'
+        fit = p.get("cover_fit", "slice")
+        body += f'<image width="{w}" height="{ch}" preserveAspectRatio="xMidYMid {fit}" href="{b64(os.path.join(W,"img",p["cover"]))}"/>'
     else:
         body += f'<rect width="{w}" height="{ch}" fill="url(#{pid}g)"/><rect width="{w}" height="{ch}" fill="url(#{pid}p)"/>'
         body += text(w / 2, ch / 2 + 6, p["wordmark"], 64, 700, "#ffffff", "middle", -0.05)
@@ -271,6 +274,16 @@ PROJECTS = [
     dict(id="osa", title="OSA Activity Tracking", repo="osa-system", cover="osa-cover.webp",
          tagline="Real-time status for student-org activity requests across a 5-stage approval chain. No repeat office visits.",
          impact="~50% faster approvals · 40+ student orgs", stack=["Laravel", "PHP", "Tailwind", "MySQL"]),
+    dict(id="amf-ticketing", title="Ateneo Music Festival Ticketing",
+         repo="event-ticketing-systems/tree/main/apps-script/ateneo-music-festival",
+         cover="amf-ticketing-cover.webp", cover_fit="meet", cover_background="#23182d",
+         tagline="Ticket sales and offline gate check-in for Ateneo Music Festival 2026.",
+         impact="QR ticket delivery and offline check-in", stack=["Apps Script", "Google Sheets", "Node.js", "SQLite"]),
+    dict(id="aao-ticketing", title="Avengers: Doomsday Ticketing",
+         repo="event-ticketing-systems/tree/main/apps-script/avengers-doomsday",
+         cover="aao-ticketing-cover.webp", cover_fit="meet", cover_background="#25271e",
+         tagline="Reservations and ticket delivery for AAO’s private screening.",
+         impact="Booking packages, payment review, and QR tickets", stack=["Apps Script", "Google Forms", "Google Sheets", "Playwright"]),
 ]
 ROLES = [
     dict(company="Symph Inc.", title="Software Developer", logo="symph.jpg",
