@@ -277,13 +277,13 @@ PROJECTS = [
     dict(id="amf-ticketing", title="Ateneo Music Festival Ticketing",
          repo="event-ticketing-systems/tree/main/apps-script/ateneo-music-festival",
          cover="amf-ticketing-cover.webp", cover_fit="meet", cover_background="#23182d",
-         tagline="Ticket sales and offline gate check-in for Ateneo Music Festival 2026.",
-         impact="QR ticket delivery and offline check-in", stack=["Apps Script", "Google Sheets", "Node.js", "SQLite"]),
+         tagline="Festival ticket sales and offline QR check-in.",
+         impact="1,501-ticket capacity · 5 gates", stack=["Apps Script", "Google Sheets", "Node.js", "SQLite"]),
     dict(id="aao-ticketing", title="Avengers: Doomsday Ticketing",
          repo="event-ticketing-systems/tree/main/apps-script/avengers-doomsday",
          cover="aao-ticketing-cover.webp", cover_fit="meet", cover_background="#25271e",
-         tagline="Reservations and ticket delivery for AAO’s private screening.",
-         impact="Booking packages, payment review, and QR tickets", stack=["Apps Script", "Google Forms", "Google Sheets", "Playwright"]),
+         tagline="Group bookings for AAO’s private charity screening.",
+         impact="377 seats · 2 gates", stack=["Apps Script", "Google Forms", "Google Sheets", "Playwright"]),
 ]
 ROLES = [
     dict(company="Symph Inc.", title="Software Developer", logo="symph.jpg",
